@@ -127,8 +127,8 @@ begin
     status=unixsock("show stat")
     status.each do |line|
       data = line.split(',')
-      if ( ( data[1] == servername ) && ( data[17] == 'UP' ) )
-        unixsock("disable server #{data[0]}/#{servername}")
+      if ( data[1][servername] && ( data[17] == 'UP' ) )
+        unixsock("disable server #{data[0]}/#{data[1]}")
       end
     end
   when /enable all EXCEPT (.+)/
